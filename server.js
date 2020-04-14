@@ -47,13 +47,14 @@ app.get("/api/timestamp/:date_string", (req, res) => {
     let dateInt = parseInt(dateString);
     //Date regards numbers as unix timestamps, strings are processed differently
     res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
-  }
-
-  let dateObject = new Date(dateString);
-
-  if (dateObject.toString() === "Invalid Date") {
-    res.json({ error: "Invaid Date" });
   } else {
-    res.json({ unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
+    let dateObject = new Date(dateString);
+
+    if (dateObject.toString() === "Invalid Date") {
+      res.json({ error: "Invaid Date" });
+    } else {
+      res.json({ unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
+    }    
   }
+
 });
